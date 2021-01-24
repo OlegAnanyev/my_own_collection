@@ -110,15 +110,18 @@ def run_module():
     result['path'] = module.params['path']
     result['content'] = module.params['content']
 
+    #пробуем открыть файл и сравнить его содержимое с тем, что планируем записать
     try:
         f = open(module.params['path'], "r")
         if module.params['content'] != f.read():
+            #если файл есть, но содерживое там не то
             f.close()
             f = open(module.params['path'], "w")
             f.write(module.params['content'])
             f.close()
             result['changed'] = True        
     except IOError:
+            #если файла нет
             f = open(module.params['path'], "w")
             f.write(module.params['content'])
             f.close()
