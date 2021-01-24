@@ -1,9 +1,6 @@
 ---
   - name: run my own module
     my_own_module:
-      name: 'hello!'
-      new: true
+      path: 'from_my_own_module.txt'
+      content: "test"
     register: testout
-  - name: dump test output
-    debug:
-      msg: '{{ testout }}'
